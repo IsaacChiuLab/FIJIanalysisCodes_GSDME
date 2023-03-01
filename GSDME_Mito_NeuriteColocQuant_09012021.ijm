@@ -1,8 +1,11 @@
+setTool("polyline");
+waitForUser("Draw Polyline and press OK");
+while (selectionType()<0) {waitForUser("Draw Polyline and press OK");}
 getSelectionCoordinates(xpoints, ypoints);
 run("Select None");
 imageID=getImageID();
-channelForMeasuring=getNumber("Channel number for measuring", 1);
-channelForMasking=getNumber("Channel number for making mask", 2);
+channelForMeasuring=getNumber("Channel number for measuring", 2);
+channelForMasking=getNumber("Channel number for making mask", 1);
 objectSize=getNumber("Typical length of object", 3);
 
 
@@ -31,7 +34,7 @@ run("Interpolate", "interval=10 smooth");
 // plotting //
 Array.getStatistics(grayValues, min, max, mean, stdDev);
 for (i = 0; i < maskValues.length; i++) {maskValues[i]=maskValues[i]*max;}
-//Array.show("values", grayValues, maskValues);
+Array.show("values", grayValues, maskValues);
 Plot.create("Title", "X-axis Label", "Y-axis Label", maskValues); Plot.add("Filled", grayValues);
 Plot.setStyle(1, "black,green,1.0,Filled"); Plot.setStyle(0, "red,red,1.0,Bar");
 
@@ -60,6 +63,7 @@ print("frame=	"+frame);
 print("averageSignalOutsideMask=	"+averageSignalOutsideMask);
 print("averageSignalInsideMask=	"+averageSignalInsideMask);
 print("ratio=	"+ratio);
+print("\n\n\n");
 
 
 
